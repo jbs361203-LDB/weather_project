@@ -2,55 +2,48 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실시간 날씨 조회</title>
+    <title>실시간 날씨</title>
 
     <style>
-
         body{
             margin:0;
             height:100vh;
             display:flex;
             justify-content:center;
             align-items:center;
-            background:linear-gradient(to right,#74ebd5,#ACB6E5);
-            font-family:Arial;
+            background: linear-gradient(90deg,#6fe7cf,#b5bde9);
+            font-family: sans-serif;
         }
 
         .card{
             background:white;
-            padding:30px;
-            border-radius:20px;
-            width:350px;
+            padding:50px;
+            border-radius:25px;
+            box-shadow:0 10px 20px rgba(0,0,0,0.2);
             text-align:center;
-            box-shadow:0 4px 10px rgba(0,0,0,0.2);
         }
 
         h1{
-            margin-bottom:20px;
+            font-size:50px;
         }
 
-        .weather{
-            font-size:20px;
-            line-height:2;
+        p{
+            font-size:30px;
         }
-
     </style>
-
 </head>
-
 <body>
 
 <div class="card">
-
     <h1>☁️ 실시간 날씨</h1>
 
-    <div class="weather">
-        🌡️ 기온: {{ temp }} °C <br>
-        💧 습도: {{ humidity }} % <br><br>
-        😊 좋은 하루 보내세요!
-    </div>
+    <p>🌡️ 기온: {{ temp }} °C</p>
 
+    <p>💧 습도: {{ humidity }} %</p>
+
+    <br>
+
+    <p>😊 좋은 하루 보내세요!</p>
 </div>
 
 </body>
