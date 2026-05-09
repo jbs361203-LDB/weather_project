@@ -16,7 +16,7 @@ def home():
         "numOfRows": "10",
         "dataType": "JSON",
         "base_date": "20260509",
-        "base_time": "2300",
+        "base_time": "2200",
         "nx": "55",
         "ny": "127"
     }
