@@ -1,59 +1,30 @@
 from flask import Flask, render_template
 import requests
-import os
-from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-API_KEY = os.getenv("WEATHER_API_KEY")
+API_KEY = "여기에_본인_API키"
 
 @app.route("/")
 def home():
 
-    # 현재 시간보다 1시간 전 사용
-    now = datetime.now() - timedelta(hours=1)
+    # 전주 날씨
+    city = "Jeonju"
 
-    base_date = now.strftime("%Y%m%d")
-    base_time = now.strftime("%H00")
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=kr"
 
-    url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst"
-
-    params = {
-        "serviceKey": API_KEY,
-        "pageNo": "1",
-        "numOfRows": "10",
-        "dataType": "JSON",
-        "base_date": base_date,
-        "base_time": base_time,
-        "nx": "55",
-        "ny": "127"
-    }
-
-    response = requests.get(url, params=params)
+    response = requests.get(url)
     data = response.json()
 
-    temperature = "없음"
-    humidity = "없음"
+    print(data)   # 디버깅용
 
-    try:
-        items = data['response']['body']['items']['item']
-
-        for item in items:
-
-            # 기온
-            if item['category'] == 'T1H':
-                temperature = item['obsrValue']
-
-            # 습도
-            if item['category'] == 'REH':
-                humidity = item['obsrValue']
-
-    except:
-        pass
+    # 기온 / 습도 가져오기
+    temp = data["main"]["temp"]
+    humidity = data["main"]["humidity"]
 
     return render_template(
         "index.html",
-        temperature=temperature,
+        temp=temp,
         humidity=humidity
     )
 
